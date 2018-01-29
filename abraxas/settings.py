@@ -136,3 +136,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = ['*']
+
+#
+# SOFT_DRF CONFIG
+#
+SHOW_DOCUMENTATION = True
+TITLE_DOCUMENTATION = 'Abraxas'
