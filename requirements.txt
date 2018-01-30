@@ -1,2 +1,3 @@
 drfscaffolding==0.2.1
 psycopg2
+djangorestframework-xml
