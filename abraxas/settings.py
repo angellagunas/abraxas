@@ -86,14 +86,33 @@ WSGI_APPLICATION = 'abraxas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+service_name = os.getenv('DATABASE_SERVICE_NAME', '').upper().replace('-', '_')
+db_user = os.getenv('DATABASE_USER', None)
+print('heeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+print(db_user)
+
+if db_user:
+    db_config = {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('{}_SERVICE_HOST'.format(service_name)),
+        'PORT': os.getenv('{}_SERVICE_PORT'.format(service_name)),
+    }
+else:
+    db_config = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
         'HOST': 'db',
         'PORT': 5432,
     }
+
+print(db_config)
+
+DATABASES = {
+    'default': db_config
 }
 
 
